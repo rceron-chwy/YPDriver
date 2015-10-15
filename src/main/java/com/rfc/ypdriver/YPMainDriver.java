@@ -37,10 +37,7 @@ import com.rfc.ypdriver.model.YPDish;
 import com.rfc.ypdriver.model.YPRestaurantMenu;
 
 /**
- * Yellow Pages WebDriver
- * 
- * http://www.singleplatform.com/
- * https://dev.locu.com/
+ * Restaurants menus scraper.
  * 
  * @author rafael.ceron
  */
@@ -74,7 +71,7 @@ public class YPMainDriver {
 		logger.info("Starting new drivers.. Time to work!");
 
 		FirefoxProfile profile = new ProfilesIni().getProfile("default");
-		//FirefoxProfile profile = new FirefoxProfile();
+		// FirefoxProfile profile = new FirefoxProfile();
 		DesiredCapabilities dc = DesiredCapabilities.firefox();
 		dc.setCapability(FirefoxDriver.PROFILE, profile);
 
@@ -129,12 +126,12 @@ public class YPMainDriver {
 					}
 				}
 
-				//Thread t = new Thread(new KeepMainAlive(mainDriver));
-				//t.start();
+				// Thread t = new Thread(new KeepMainAlive(mainDriver));
+				// t.start();
 				logger.info("Number of Threads Waiting to start: " + numberOfMenus);
 				startSignal.countDown();
 				semaphore.acquire(numberOfMenus);
-				//t.interrupt();
+				// t.interrupt();
 			}
 
 			logger.info("======================================================================");
@@ -148,7 +145,7 @@ public class YPMainDriver {
 				logger.info("Coffee Break! Sleeping for 1 minutes at: " + new Date());
 				coffeeBreak = 0;
 				releaseDrivers();
-				Thread.sleep(60 * 1000); //1 minutes
+				Thread.sleep(60 * 1000); // 1 minutes
 				startDrivers();
 			} else {
 				logger.info("Not time for a break yet [" + coffeeBreak + "] sleeping for 1 seconds at: " + new Date());
@@ -192,7 +189,7 @@ public class YPMainDriver {
 				startDrivers();
 			}
 
-			//Thread.sleep(1000);
+			// Thread.sleep(1000);
 		} while (results == null);
 
 		return proceed;
@@ -202,12 +199,7 @@ public class YPMainDriver {
 
 		private RemoteWebDriver driver;
 
-		public KeepMainAlive(RemoteWebDriver driver) {
-			this.driver = driver;
-		}
-
 		public void run() {
-
 			for (;;) {
 				try {
 					logger.info("pinging main driver...");
@@ -240,17 +232,13 @@ public class YPMainDriver {
 			Long id = null;
 
 			try {
-
-				//logger.info("Waiting to START!! Thread: " + Thread.currentThread().getId() + " - " + Thread.currentThread().getName());
 				startSignal.await();
-
-				//logger.info("Starting Thread: " + Thread.currentThread().getId() + " - " + Thread.currentThread().getName());
 				auxDriver = queue.take();
 
 				String[] sp = menu.split("/");
 				id = Long.parseLong(sp[sp.length - 2]);
 
-				//check if menu already exists!!
+				// check if menu already exists.
 				if (!dao.exists(id)) {
 
 					logger.info("Getting menu from: " + menu);
@@ -351,7 +339,6 @@ public class YPMainDriver {
 					}
 
 					dao.save(restaurantMenu);
-					//					Thread.sleep(500);
 				} else {
 					logger.info("Menu [" + id + "] already saved..");
 				}

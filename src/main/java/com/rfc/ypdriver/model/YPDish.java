@@ -20,7 +20,7 @@ public class YPDish {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public String getPrice() {
 		return price;
 	}

@@ -34,7 +34,7 @@ public class YPRestaurantMenu {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getStreet() {
 		return street;
 	}
