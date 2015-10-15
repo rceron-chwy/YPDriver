@@ -1,68 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Rafael Ceron said: =) -->
-<!-- This is the really nice NEW log4j 2!!! Take a moment to read the documentation! It's really cool. Specially you Finato! you'll like it!!!  -->
-<!-- http://logging.apache.org/log4j/2.x/manual/configuration.html#ConfigurationSyntax -->
 <configuration status="OFF" monitorInterval="60">
-
 	<properties>
 		<property name="filename">logs/ypdriver.log</property>
 	</properties>
-
 	<appenders>
 		<Console name="STDOUT" target="SYSTEM_OUT">
 			<PatternLayout pattern="[%d{HH:mm:ss.SSS}] %p %c: %m%n" />
 		</Console>
-
 		<File name="FILE" fileName="${filename}">
 			<PatternLayout pattern="[%d{HH:mm:ss.SSS}] %p %c: %m%n" />
 		</File>
-
 	</appenders>
-
 	<loggers>
-
 		<root level="info">
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILE" />
 		</root>
 	</loggers>
 </configuration>
-
-<!-- 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-
-	<appenders>
-		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
-		</Console>
-	</appenders>
-
-	<appender class="org.apache.log4j.FileAppender" name="F1">
-		<param value="UTF-8" name="encoding" />
-		<param value="${catalina.home}/logs/pettrail.log" name="file" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param value="[%d] %p %c: %m%n - %X{request}%n" name="ConversionPattern" />
-		</layout>
-	</appender>
-
-	<logger name="org.springframework.beans.factory">
-		<level value="debug" />
-	</logger>
-
-	<logger name="org.apache.velocity">
-		<level value="debug" />
-	</logger>
-
-	<logger name="com.pettrail">
-		<level value="dubug" />
-	</logger>
-
-	<root>
-		<level value="info" />
-		<appender-ref ref="C1" />
-		<appender-ref ref="F1" />
-	</root>
-</log4j:configuration>
--->
